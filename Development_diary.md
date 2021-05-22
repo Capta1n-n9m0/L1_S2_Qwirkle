@@ -1,4 +1,4 @@
-#Development diary.
+# Development diary.
 
 Here I am writing everything I am adding to the project. Or just provide more description for commits.
 

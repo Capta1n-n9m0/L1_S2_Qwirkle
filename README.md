@@ -1,4 +1,4 @@
-#Qwirkle project
+# Qwirkle project
 
 It is a project that I will need for my "Algorithms and Data Structures" course.
 
