@@ -1,3 +1,5 @@
 /cmake-build-debug/
 /.idea/
 *.elf
+/linux/
+/move_to_linux.sh

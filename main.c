@@ -3,16 +3,18 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "color.h"
+#include "qwirkle.h"
 
 void print_help();
 
 int main(int argc, char **argv) {
     assert(argc > 0);
-    char args[] = "hn:d:lp:o:";
-    int difficulty;
+    char args[] = "hd:lp";
+    int difficulty = 3, pvp_flag = 0;
     char *ptr;
     if(argc == 1){
         puts("Here goes plain execution sequence.");
+        qwirkle_game_loop(difficulty, pvp_flag);
     }
     else{
         // puts("But here i look at arguments.");
@@ -22,29 +24,28 @@ int main(int argc, char **argv) {
                     print_help();
                     exit(0);
                     break;
-                case 'n':
-                    printf("Name : %s.\n", optarg);
-                    break;
                 case 'd':
                     difficulty = strtol(optarg, &ptr, 10);
+                    if(difficulty > 3) difficulty = 3;
+                    if(difficulty < 0) difficulty = 0;
                     printf("Difficulty: %d.\n", difficulty);
+                    qwirkle_game_loop(difficulty, pvp_flag);
                     break;
                 case 'l':
                     puts("Leaderboard.");
+                    puts("Not ready yet.");
                     break;
                 case 'p':
                     puts("PVP mode.");
-                    break;
-                case ':':
-                    printf("There should be parameter after %s\n", argv[optind-1]);
-                    exit(1);
+                    pvp_flag = 1;
+                    qwirkle_game_loop(0, pvp_flag);
                     break;
                 case '?':
                     printf("Unrecognized argument: %c\n", optopt);
                     break;
                 default:
                     puts("Lol wtf. getopt just return smth wierd");
-                    printf("Wierd: %c or %d", opt, opt);
+                    printf("Weird: %c or %d", opt, opt);
                     exit(2);
                     break;
             }
@@ -60,15 +61,20 @@ void print_help(){
     CONSOLE_COLOR_PRINT("W ", CONSOLE_COLOR_GREEN);
     CONSOLE_COLOR_PRINT("I ", CONSOLE_COLOR_BLUE);
     CONSOLE_COLOR_PRINT("R ", CONSOLE_COLOR_YELLOW);
-    CONSOLE_COLOR_PRINT("K ", CONSOLE_COLOR_RED);
-    CONSOLE_COLOR_PRINT("L ", CONSOLE_COLOR_GREEN);
-    CONSOLE_COLOR_PRINT("E ", CONSOLE_COLOR_BLUE);
-    puts(" =====");
+    CONSOLE_COLOR_PRINT("K ", CONSOLE_COLOR_ORANGE);
+    CONSOLE_COLOR_PRINT("L ", CONSOLE_COLOR_PURPLE);
+    CONSOLE_COLOR_PRINT("E ", CONSOLE_COLOR_WHITE);
+    puts("=====");
     puts("Qwirkle project : sub-alfa 1.0");
+    puts("You will be asked to enter you name at the start of the game.");
+    puts("");
+    //puts("");
     puts("Preset:");
     puts("  Draw bag: At the beginning of the game, the 32 tiles are put in a draw bag.");
     puts("  Deck:     Each player picks 6 tiles at random from the draw bag. These 6 tiles form the player’s deck.");
     puts("  Board:    One more tile is picked from the bag and put in the middle of the board.");
+    puts("");
+    //puts("");
     puts("Rules:");
     puts("  The global aim in Qwirkle is to make tile sequences:");
     puts("    Neighbor: Two tiles are neighbors if and only if they have one adjoining edge.");
@@ -90,18 +96,16 @@ void print_help(){
     puts("Usage: qwirkle [OPTIONS]");
     puts("Options:");
     puts("  -h:         Displays help and exits with code 0");
-    puts("  -n NAME:    Write you name here to save record in local leaderboard.");
-    puts("  -d LEVEL:   Let's you choose strength 0-3 of a computer. Default is 2.");
+    puts("  -d LEVEL:   Let's you choose strength 0-3 of a computer. Default is 3.");
     puts("              Anything lager than 3 is considered 3. Anything lower that 0 is considered 0");
     puts("  -l:         Displays local leaderboard and exits with code 0");
-    puts("  -p NAME_P1: PVP mode. Requires player one name and needs -o option afterwards.");
-    puts("  -o NAME_P2: Name of the opponent at PVP mode.");
+    puts("  -p:         PVP mode. Will ask your and opponent's name.");
     puts("");
     puts("Examples:");
     puts("  qwirkle");
     puts("  qwirkle -l");
-    puts("  qwirkle -d 2 -n Abbas");
-    puts("  qwirkle -p Abbas -o Arash");
+    puts("  qwirkle -d 2");
+    puts("  qwirkle -p");
     puts("");
     //puts("");
 }
