@@ -1,5 +1,6 @@
 #include "player.h"
 
+
 void sha2_password_hashing(BYTE plain_password[MAXIMUM_PASSWORD_LENGTH],BYTE sha2_hash_password[SHA256_BLOCK_SIZE]){
     SHA256_CTX ctx;
 

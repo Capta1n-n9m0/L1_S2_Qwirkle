@@ -22,8 +22,20 @@ void qwirkle_game_loop(int difficulty, int pvp_flag){
 
 void qwirkle_computer(int difficulty, Player player){
     printf("%s\n", player.name);
+    char color[20], c;
+    colored_letter letter;
+    while(1){
+        printf("Dear %s, enter a capital letter and a color: ", player.name);
+
+        scanf("%c %s%*c", &c, color);
+        letter = color_letter(c, color);
+        print_colored_letter(letter);
+
+        //break;
+    }
 }
 
 void qwirkle_pvp(Player player1, Player player2){
 
 }
+
