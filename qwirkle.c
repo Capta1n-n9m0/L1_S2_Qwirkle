@@ -25,13 +25,41 @@ void qwirkle_computer(int difficulty, Player player){
     char color[20], c;
     colored_letter letter;
     while(1){
-        printf("Dear %s, enter a capital letter and a color: ", player.name);
+        // printf("Dear %s, enter a capital letter and a color: ", player.name);
+//
+        // scanf("%c %s%*c", &c, color);
+        // letter = color_letter(c, color);
+        // print_colored_letter(letter);
+        int n, n_tiles, number;
+        printf("Dear %s, enter how many tiles you want in a bag: ", player.name);
+        scanf("%d%*c", &n);
+        Bag *bag, *deck;
+        bag  = createBagWithTiles(n);
+        deck = createEmptyBag();
+        Tile current;
+        printf("You bag contains %d tiles.\n", bag->numberOfTiles);
+        printf("You have in hand: \n");
+        displayBag(deck);
+        while (bag->numberOfTiles){
+            printf("Enter how many tiles you want to take from the bag: ");
+            scanf("%d%*c", &n_tiles);
+            emptyBag(deck);
+            deck = getDeckFromBag(bag, n_tiles);
+            printf("You bag contains %d tiles.\n", bag->numberOfTiles);
+            while(deck->numberOfTiles){
+                printf("You have in hand: \n");
+                displayBag(deck);
+                printf("Choose tile to pick(start from zero)\n");
+                scanf("%d%*c", &number);
+                current = popFromBag(deck, number);
+                printf("You picked: ");
+                displayTile(&current);
+            }
+        }
+        emptyBag(deck);
+        emptyBag(bag);
 
-        scanf("%c %s%*c", &c, color);
-        letter = color_letter(c, color);
-        print_colored_letter(letter);
-
-        //break;
+        break;
     }
 }
 

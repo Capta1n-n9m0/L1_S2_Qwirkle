@@ -1,6 +1,6 @@
 #include "Tile.h"
 
-Tile *createTile(const char letter, const char* color_str){
+Tile *createTile_p(const char letter, const char* color_str){
     if(!('A' <= letter && letter <= 'D')){
         SLEEP(0.5);
         fprintf(stderr, "Illegal letter %c!\n", letter);
@@ -16,6 +16,30 @@ Tile *createTile(const char letter, const char* color_str){
         res->c = COLORCODE_BLUE;
     else if(strcmp(color_str, "yellow")==0)
         res->c = COLORCODE_YELLOW;
+    else {
+        SLEEP(0.5);
+        fprintf(stderr, "Unrecognised color: %s!\n", color_str);
+        assert(0);
+    }
+    return res;
+}
+
+Tile createTile(char letter, const char* color_str){
+    if(!('A' <= letter && letter <= 'D')){
+        SLEEP(0.5);
+        fprintf(stderr, "Illegal letter %c!\n", letter);
+        assert(0);
+    }
+    Tile res;
+    res.letter = letter;
+    if(strcmp(color_str, "red")==0)
+        res.c = COLORCODE_RED;
+    else if(strcmp(color_str, "green")==0)
+        res.c = COLORCODE_GREEN;
+    else if(strcmp(color_str, "blue")==0)
+        res.c = COLORCODE_BLUE;
+    else if(strcmp(color_str, "yellow")==0)
+        res.c = COLORCODE_YELLOW;
     else {
         SLEEP(0.5);
         fprintf(stderr, "Unrecognised color: %s!\n", color_str);

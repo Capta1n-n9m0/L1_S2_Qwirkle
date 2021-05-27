@@ -1,0 +1,4 @@
+#ifndef L1_S2_QWIRKLE_BOARD_H
+#define L1_S2_QWIRKLE_BOARD_H
+
+#endif //L1_S2_QWIRKLE_BOARD_H

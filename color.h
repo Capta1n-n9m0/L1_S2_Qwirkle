@@ -1,6 +1,8 @@
 #ifndef L1_S2_QWIRKLE_COLOR_H
 #define L1_S2_QWIRKLE_COLOR_H
 
+#include <string.h>
+
 #include <stdio.h>
 #ifdef _WIN32
 # include <windows.h>
@@ -24,7 +26,7 @@
 # define CONSOLE_COLOR_WHITE "\e[0;37m\e[40m"
 # define CONSOLE_COLOR_RESET "\e[0m"
 # define CONSOLE_COLOR_PRINT(str, color) printf(color "%s" "\e[0m", str)
-# define CONSOLE_COLOR_PRINTc(char_, color) printf(color "%c" "\e[0m", char_)
+# define CONSOLE_COLOR_PRINTC(char_, color) printf(color "%c" "\e[0m", char_)
 #endif
 
 #define COLORCODE_RED       1

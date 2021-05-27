@@ -7,7 +7,8 @@
 
 typedef colored_letter Tile;
 
-Tile *createTile(char letter, const char* color_str);
+Tile *createTile_p(char letter, const char* color_str);
+Tile createTile(char letter, const char* color_str);
 void displayTile(const Tile *tile);
 void freeTile(Tile *tile);
 

@@ -4,11 +4,15 @@
 #include <stdlib.h>
 #include "color.h"
 #include "qwirkle.h"
+#include "uni_random.h"
+#include <time.h>
+
 
 void print_help();
 
 int main(int argc, char **argv) {
     assert(argc > 0);
+    SRANDOM(time(0));
     char args[] = "hd:lp";
     int difficulty = 3, pvp_flag = 0;
     char *ptr;
@@ -23,7 +27,6 @@ int main(int argc, char **argv) {
                 case 'h':
                     print_help();
                     exit(0);
-                    break;
                 case 'd':
                     difficulty = strtol(optarg, &ptr, 10);
                     if(difficulty > 3) difficulty = 3;

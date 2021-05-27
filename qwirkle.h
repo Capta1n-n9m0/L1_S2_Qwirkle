@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include "color.h"
 #include "helper_functions.h"
+#include "Tile.h"
+#include "Tiles.h"
 
 void qwirkle_game_loop(int difficulty, int pvp_flag);
 
