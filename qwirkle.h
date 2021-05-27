@@ -7,6 +7,7 @@
 #include "helper_functions.h"
 #include "Tile.h"
 #include "Tiles.h"
+#include "Board.h"
 
 void qwirkle_game_loop(int difficulty, int pvp_flag);
 

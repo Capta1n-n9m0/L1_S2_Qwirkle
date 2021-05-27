@@ -25,35 +25,37 @@ void qwirkle_computer(int difficulty, Player player){
     char color[20], c;
     colored_letter letter;
     while(1){
-        // printf("Dear %s, enter a capital letter and a color: ", player.name);
-//
-        // scanf("%c %s%*c", &c, color);
-        // letter = color_letter(c, color);
-        // print_colored_letter(letter);
-        int n, n_tiles, number;
+        int n, n_tiles, number, b_rows, b_cols, row, col;
         printf("Dear %s, enter how many tiles you want in a bag: ", player.name);
         scanf("%d%*c", &n);
+        printf("Dear %s, choose number of rows and columns: ", player.name);
+        scanf("%d %d%*c", &b_rows, &b_cols);
+        Board board = createEmptyBoard(b_rows, b_cols);
         Bag *bag, *deck;
         bag  = createBagWithTiles(n);
         deck = createEmptyBag();
         Tile current;
+        displayBoard(board);
         printf("You bag contains %d tiles.\n", bag->numberOfTiles);
         printf("You have in hand: \n");
         displayBag(deck);
         while (bag->numberOfTiles){
-            printf("Enter how many tiles you want to take from the bag: ");
-            scanf("%d%*c", &n_tiles);
             emptyBag(deck);
-            deck = getDeckFromBag(bag, n_tiles);
+            deck = getDeckFromBag(bag, 6);
             printf("You bag contains %d tiles.\n", bag->numberOfTiles);
             while(deck->numberOfTiles){
                 printf("You have in hand: \n");
                 displayBag(deck);
-                printf("Choose tile to pick(start from zero)\n");
-                scanf("%d%*c", &number);
+                printf("Choose tile to pick(start from zero) and position on the board\n");
+                scanf("%d %d %d%*c", &number, &row, &col);
                 current = popFromBag(deck, number);
-                printf("You picked: ");
-                displayTile(&current);
+                while(!insertTileInBoard(&board, current, row, col)){
+                    printf("Invalid place. Please, try again\n");
+                    printf("Enter row and col:");
+                    scanf("%d %d%*c", &row, &col);
+                }
+                displayBoard(board);
+                if(bag->numberOfTiles!=0)addNewTileToBag(deck, popRandomTileFromBag(bag));
             }
         }
         emptyBag(deck);
