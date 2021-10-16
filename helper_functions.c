@@ -10,6 +10,7 @@ void scan_string(char *str, int max_len){
     }
     buff[len] = '\0';
     memcpy(str, buff, max_len);
+    fflush(stdin);
 
     free(buff);
 }

@@ -13,8 +13,9 @@ void qwirkle_game_loop(int difficulty, int pvp_flag){
     if(!pvp_flag){
         puts("Please, enter your name below. Maximum length is 63 symbols.");
         Player player;
-        scan_player_name(player.name);
-        qwirkle_computer(difficulty, player);
+        player = scan_player();
+        print_player(stdout, player);
+        //qwirkle_computer(difficulty, player);
     } else{
 
     }
@@ -26,7 +27,7 @@ void qwirkle_computer(int difficulty, Player player){
     colored_letter letter;
     while(1){
         int n, n_tiles, number, b_rows, b_cols, row, col;
-        printf("Dear %s, enter how many tiles you want in a bag: ", player.name);
+        printf("Dear %s, enter how many tile sets you want in a bag: ", player.name);
         scanf("%d%*c", &n);
         printf("Dear %s, choose number of rows and columns: ", player.name);
         scanf("%d %d%*c", &b_rows, &b_cols);
