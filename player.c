@@ -72,7 +72,13 @@ void print_player(FILE *f, Player p){
     for(int ii = 0; ii < SHA256_BLOCK_SIZE; ii++){
         fprintf(f, "%x", p.pass.hash[ii]);
     }
-    fprintf(f, " | %s |\n", p.pass.salt);
+    fprintf(f, " | %s | ", p.pass.salt);
+    fprintf(f, "%d | %d | %d | %d | %d |\n",p.score,p.pvp_wins,p.pvp_loses,p.pvp_draws,p.is_player);
+}
+
+void save_player(FILE *f, Player p){
+    fseek(f, 0, SEEK_END);
+    fwrite(&p, sizeof (Player), 1, f);
 }
 
 void scan_password(char *str, int max_len){
@@ -88,5 +94,17 @@ void scan_password(char *str, int max_len){
     fflush(stdin);
 
     free(buff);
+}
+
+void sort_players_score_DCS(Player p[], int n){
+    for(int ii = 0; ii < n - 1; ii++){
+        for(int jj = ii; jj < n; jj++){
+            if(p[jj].score > p[ii].score){
+                Player temp = p[ii];
+                p[ii] = p[jj];
+                p[jj] = temp;
+            }
+        }
+    }
 }
 

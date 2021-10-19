@@ -15,6 +15,9 @@ void qwirkle_game_loop(int difficulty, int pvp_flag){
         Player player;
         player = scan_player();
         print_player(stdout, player);
+        FILE *f = fopen("test.bin", "wb");
+        save_player(f, player);
+        fclose(f);
         //qwirkle_computer(difficulty, player);
     } else{
 

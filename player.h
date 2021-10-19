@@ -27,6 +27,7 @@ Player init_new_player(char name[MAXIMUM_NAME_LENGTH], BYTE plane_password[MAXIM
 void scan_player_name(char name[MAXIMUM_NAME_LENGTH]);
 void print_player(FILE *f, Player p);
 void scan_password(char *str, int max_len);
+void save_player(FILE *f, Player p);
 
 
 
